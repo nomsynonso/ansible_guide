@@ -7,9 +7,18 @@ terraform {
   }
 }
 
-
 provider "azurerm" {
   features {}
+}
+
+terraform {
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "nomsynonso"
+    workspaces {
+      name = "ansible-practice-lab"
+    }
+  }
 }
 
 resource "azurerm_resource_group" "main" {
@@ -99,6 +108,57 @@ resource "azurerm_linux_virtual_machine" "main" {
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.main.id,
+  ]
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
+    version   = "latest"
+  }
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+  }
+}
+
+
+resource "azurerm_network_interface" "workers" {
+  for_each = {
+      worker1 = "w1-nic"
+      worker2 = "w2-nic"
+      worker3 = "w3-nic"
+  }
+  name                = "${var.prefix}-${each.key}"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.internal.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_linux_virtual_machine" "workers" {
+  for_each = {
+    worker1 = "Standard_B1ls"
+    worker2 = "Standard_B1ls"
+    worker3 = "Standard_B1ls"
+  }
+  #name     = each.key
+  #size = each.value
+
+  name                            = "${var.prefix}-${each.key}"
+  resource_group_name             = azurerm_resource_group.main.name
+  location                        = azurerm_resource_group.main.location
+  size                            = each.value
+  admin_username                  = var.username
+  admin_password                  = var.password
+  disable_password_authentication = false
+  network_interface_ids = [
+    azurerm_network_interface.workers[each.key].id
   ]
 
   source_image_reference {

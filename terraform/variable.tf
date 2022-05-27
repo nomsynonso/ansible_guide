@@ -19,6 +19,7 @@ variable "username" {
 
 variable "password" {
   description = "admin password to login to the server"
+  sensitive = true
   # $Env:ansible_password = 'password'    to set
   # $Env:ansible_password = ''            to un-set
   default = "$Env:ansible_password"
