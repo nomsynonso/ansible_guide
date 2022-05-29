@@ -1,0 +1,13 @@
+---
+- hosts: "*"
+  become: true
+  tasks:
+  - name: update repository index and install apache & php
+    apt:
+      update_cache: yes
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: present
+   # when: ansible_distribution == "ubuntu"
+
