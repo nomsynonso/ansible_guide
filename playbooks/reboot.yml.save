@@ -1,4 +1,0 @@
-- hosts: "*"
-  become: yes
-  tasks:
-    ansible.builtin.c
