@@ -129,6 +129,7 @@ resource "azurerm_network_interface" "workers" {
       worker1 = "w1-nic"
       worker2 = "w2-nic"
       worker3 = "w3-nic"
+      worker4 = "w4-nic"
   }
   name                = "${var.prefix}-${each.key}"
   resource_group_name = azurerm_resource_group.main.name
@@ -146,6 +147,7 @@ resource "azurerm_linux_virtual_machine" "workers" {
     worker1 = "Standard_B1ls"
     worker2 = "Standard_B1ls"
     worker3 = "Standard_B1ls"
+    worker4 = "Standard_B1ls"
   }
   #name     = each.key
   #size = each.value
