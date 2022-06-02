@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [ main ]
 
+rules:
+  truthy:
+    allowed-values: ['true', 'false', 'on']
+    check-keys: false
+
 jobs:
   yamllint:
     name: 'Yamllint'
