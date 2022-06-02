@@ -19,7 +19,7 @@ jobs:
       - name: 'Yamllint'
         uses: karancode/yamllint-github-action@master
         with:
-          yamllint_file_or_dir: /playbooks/.
+          yamllint_file_or_dir: ansible_guide/playbooks/.
           yamllint_strict: false
           yamllint_comment: false
         #env:
