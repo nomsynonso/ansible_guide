@@ -9,10 +9,7 @@ on:
   pull_request:
     branches: [ main ]
 
-rules:
-  truthy:
-    allowed-values: ['true', 'false', 'on']
-    check-keys: false
+# yamllint disable-line rule:truthy
 
 jobs:
   yamllint:
