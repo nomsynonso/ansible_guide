@@ -102,9 +102,9 @@ resource "azurerm_linux_virtual_machine" "main" {
   name                            = "${var.prefix}-controlvm"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
-  size                            = "Standard_D2s_v3"
-  admin_username                  = var.username
-  admin_password                  = var.password
+  size                            = "${var.main_vm_size}"
+  admin_username                  = "${var.username}"
+  admin_password                  = "${var.password}"
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.main.id,
@@ -144,10 +144,10 @@ resource "azurerm_network_interface" "workers" {
 
 resource "azurerm_linux_virtual_machine" "workers" {
   for_each = {
-    worker1 = "Standard_B1ls"
-    worker2 = "Standard_B1ls"
-    worker3 = "Standard_B1ls"
-    worker4 = "Standard_B1ls"
+    worker1 = "${var.workers_vm_size}"
+    worker2 = "${var.workers_vm_size}"
+    worker3 = "${var.workers_vm_size}"
+    worker4 = "${var.workers_vm_size}"
   }
   #name     = each.key
   #size = each.value
@@ -156,8 +156,8 @@ resource "azurerm_linux_virtual_machine" "workers" {
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
   size                            = each.value
-  admin_username                  = var.username
-  admin_password                  = var.password
+  admin_username                  = "${var.username}"
+  admin_password                  = "${var.password}"
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.workers[each.key].id

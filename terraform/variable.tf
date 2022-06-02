@@ -24,3 +24,15 @@ variable "password" {
   # $Env:ansible_password = ''            to un-set
   default = "$Env:ansible_password"
 }
+
+variable "main_vm_size" {
+  description = "size of the main vm for control"
+  type = string
+  default = "Standard_D2s_v3"
+}
+
+variable "workers_vm_size" {
+  description = "size of the vm's to be managed"
+  type = string
+  default = "Standard_B1ls"
+}

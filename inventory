@@ -1,4 +1,9 @@
+[web_servers]
 ansible-worker1
 ansible-worker2
+
+[db_servers]
 ansible-worker3
+
+[file_servers]
 ansible-worker4

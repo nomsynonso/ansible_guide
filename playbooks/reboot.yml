@@ -5,4 +5,4 @@
   tasks:
        - name: rebooting servers
          reboot:
-           test_command: "whoami"
+              test_command: "whoami"

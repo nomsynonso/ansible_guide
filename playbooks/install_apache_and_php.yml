@@ -9,5 +9,4 @@
         - apache2
         - libapache2-mod-php
       state: present
-   # when: ansible_distribution == "ubuntu"
-
+    # when: ansible_distribution == "ubuntu"

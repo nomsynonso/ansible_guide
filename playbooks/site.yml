@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: install updates
+      package:
+        update-cache: yes 
+
+- hosts: web_servers
+  become: true
+  tasks:
+    - name: install apache and php
+      apt:
+        name: 
+        - apache2
+        - libapache2-mod-php
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+- hosts: db_servers
+  become: true
+  tasks:
+    - name: install mariadb package
+      apt:
+        name: mariadb-server
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+- hosts: file_servers
+  become: true
+  tasks:
+    - name: install samba package
+      package:
+        name: samba
+        state: latest
