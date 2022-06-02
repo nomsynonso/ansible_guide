@@ -21,7 +21,7 @@ jobs:
       - name: Yamllint Github Action
         uses: karancode/yamllint-github-action@v2.0.0
         with:
-          yamllint_file_or_dir: ~/ansible_guide/playbooks/reboot.yml
+          yamllint_file_or_dir: 'playbooks/reboot.yml'
           yamllint_strict: false
           yamllint_comment: false
         #env:
