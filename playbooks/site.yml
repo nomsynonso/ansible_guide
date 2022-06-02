@@ -4,16 +4,17 @@
   pre_tasks:
     - name: install updates
       package:
-        update-cache: yes 
+# yamllint disable-line rule:truthy      
+        update-cache: yes
 
 - hosts: web_servers
   become: true
   tasks:
     - name: install apache and php
       apt:
-        name: 
-        - apache2
-        - libapache2-mod-php
+        name:
+          - apache2
+          - libapache2-mod-php
         state: latest
       when: ansible_distribution == "Ubuntu"
 

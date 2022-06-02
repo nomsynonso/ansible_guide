@@ -4,5 +4,6 @@
   tasks:
     - name: apt
       apt:
+# yamllint disable-line rule:truthy      
         update_cache: yes
         upgrade: 'yes'
