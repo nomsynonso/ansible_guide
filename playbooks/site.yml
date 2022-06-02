@@ -4,7 +4,7 @@
   pre_tasks:
     - name: install updates
       package:
-# yamllint disable-line rule:truthy      
+        # yamllint disable-line rule:truthy
         update-cache: yes
 
 - hosts: web_servers

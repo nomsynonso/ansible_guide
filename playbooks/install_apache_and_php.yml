@@ -4,7 +4,7 @@
   tasks:
   - name: update repository index and install apache & php
     apt:
-# yamllint disable-line rule:truthy    
+      # yamllint disable-line rule:truthy
       update_cache: yes
       name:
         - apache2
