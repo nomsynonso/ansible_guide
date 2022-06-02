@@ -24,6 +24,14 @@ terraform {
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-RG"
   location = var.location
+
+}
+
+resource "azurerm_management_lock" "resource-group-level-lock" {
+  name       = "resource-group-lock"
+  scope      = azurerm_resource_group.main.id
+  lock_level = "ReadOnly"
+  notes      = "This Resource Group is locked to Read-Only"
 }
 
 resource "azurerm_virtual_network" "main" {
@@ -102,9 +110,9 @@ resource "azurerm_linux_virtual_machine" "main" {
   name                            = "${var.prefix}-controlvm"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
-  size                            = "${var.main_vm_size}"
-  admin_username                  = "${var.username}"
-  admin_password                  = "${var.password}"
+  size                            = var.main_vm_size
+  admin_username                  = var.username
+  admin_password                  = var.password
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.main.id,
@@ -156,8 +164,8 @@ resource "azurerm_linux_virtual_machine" "workers" {
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
   size                            = each.value
-  admin_username                  = "${var.username}"
-  admin_password                  = "${var.password}"
+  admin_username                  = var.username
+  admin_password                  = var.password
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.workers[each.key].id
