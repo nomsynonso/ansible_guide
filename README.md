@@ -1,6 +1,6 @@
 # ansible_guide
 
-[![yamllint-github-actions](https://github.com/nomsynonso/ansible_guide/actions/workflows/yamllint-actions.yml/badge.svg)](https://github.com/nomsynonso/ansible_guide/actions/workflows/yamllint-actions.yml)
+[![yamllint-github-actions](https://github.com/nomsynonso/ansible_guide/actions/workflows/yamllint-actions.yml/badge.svg)](https://github.com/nomsynonso/ansible_guide/actions/workflows/yamllint-actions.yml)   [![superlinter-github-actions](https://github.com/nomsynonso/ansible_guide/actions/workflows/superlinter-actions.yml/badge.svg)](https://github.com/nomsynonso/ansible_guide/actions/workflows/superlinter-actions.yml)
 
 my ansible guide and tutorial.
 
